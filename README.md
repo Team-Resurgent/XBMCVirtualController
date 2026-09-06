@@ -47,8 +47,28 @@ Six skins ship ready to use, rendered here by the app's own skin engine at 100% 
   <sub>Bradley in Amber, Blue, Green, Red and White &nbsp;·&nbsp; Xtender</sub>
 </p>
 
-Right-click the remote for the context menu: pick a skin, scale it between 50% and 100%,
-toggle single-click mode, hide it to the tray, or change the connection.
+## The context menu
+
+Right-click **anywhere on the remote** — there is no title bar, so this is where everything
+lives. The same menu is on the tray icon, which matters because the remote is deliberately
+kept out of the taskbar.
+
+<p align="center">
+  <img src="docs/screenshots/context-menu.png" alt="Right-click context menu">
+</p>
+
+| Item | What it does |
+| --- | --- |
+| **Skin** ▸ | Every folder under `Skins\` that contains a `Skin.xml`. The active one is ticked; picking another reloads it immediately and remembers the choice. |
+| **Scale** ▸ | 50%, 60%, 70%, 80%, 90% or 100%. The skin is re-rendered at the new size. Note this one is *not* remembered — the remote reopens at 100%. |
+| **Hide** | Hides the remote; the item then reads **Show**. Since the remote has no taskbar button, the tray icon is how you bring it back. |
+| **Connection** | Reopens the connection dialog to point the remote at a different box without restarting. |
+| **Send Single Click** | Off (default), holding a button auto-repeats, as a real remote does. On, each click sends exactly one non-repeating press — useful when a repeat would overshoot in a menu. |
+| **About** | Shows the `<credits>` block from the current skin's `Skin.xml` — its name and author. |
+| **Exit** | Quits, saving the window position, the chosen skin and the single-click setting. |
+
+Dragging the remote anywhere that is *not* a button moves it, and it snaps to screen edges
+when you get within 30px of one.
 
 ## Download & run
 
