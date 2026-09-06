@@ -55,6 +55,17 @@ namespace XBMCVirtualController
             textAddress.Text = Properties.Settings.Default.Address;
             textPort.Text = Properties.Settings.Default.Port.ToString();
             checkBoxAutoConnect.Checked = Properties.Settings.Default.AutoConnect;
+
+            // The remote that owns this dialog is borderless, layered and kept out
+            // of the taskbar, and the splash has already burned the few seconds
+            // Windows allows a new process to claim the foreground. That lets this
+            // modal dialog open *behind* other applications, and because the modal
+            // loop disables the remote the whole app then looks frozen: it ignores
+            // every click, and cannot be dragged. Force the dialog to the front so
+            // there is always something visible to answer.
+            TopMost = true;
+            BringToFront();
+            Activate();
         }
 
     }

@@ -37,6 +37,12 @@ namespace XBMCVirtualController
             this.Width = XBMCVirtualController.Properties.Resources.splash.Width;
             this.Height = XBMCVirtualController.Properties.Resources.splash.Height;
             SetBitmap(XBMCVirtualController.Properties.Resources.splash);
+
+            // Shown modally at startup, so it can hide behind other windows for the
+            // two seconds it lives - during which the app looks like it did nothing.
+            TopMost = true;
+            BringToFront();
+            Activate();
         }
 
         private void Splash_MouseClick(object sender, MouseEventArgs e)
