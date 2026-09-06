@@ -60,9 +60,48 @@ jobs:
           path: ${{ steps.pkg.outputs.name }}.zip
           if-no-files-found: error
 
-      - name: Publish release
+      - name: Publish rolling "latest" release
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ZIP: ${{ steps.pkg.outputs.name }}.zip
+          VERSION: ${{ steps.pkg.outputs.version }}
+        run: |
+          # gh will not move an existing tag, so drop the previous rolling
+          # release and its tag before recreating it at this commit. The first
+          # ever run has nothing to delete, hence the swallowed exit code.
+          gh release delete latest --cleanup-tag --yes 2>&1 | Write-Host
+          $LASTEXITCODE = 0
+
+          $built = (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss UTC')
+          $notes = @(
+            "Rolling build of the latest commit on main."
+            ""
+            "- Version: $env:VERSION"
+            "- Commit: $env:GITHUB_SHA"
+            "- Built: $built"
+            ""
+            "Unzip anywhere and run XBMCVirtualController.exe. Keep the Skins folder"
+            "beside the exe. No .NET runtime install is required."
+          ) -join "`n"
+          Set-Content -Path latest-notes.md -Value $notes -Encoding utf8
+
+          gh release create latest "$env:ZIP" `
+            --title "Latest build ($($env:GITHUB_SHA.Substring(0,7)))" `
+            --notes-file latest-notes.md `
+            --latest
+
+      - name: Publish tagged release
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ${{ steps.pkg.outputs.name }}.zip
-          generate_release_notes: true
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ZIP: ${{ steps.pkg.outputs.name }}.zip
+        run: |
+          # --latest=false keeps the rolling "latest" release as the one the
+          # repo's Latest badge points at.
+          gh release create "$env:GITHUB_REF_NAME" "$env:ZIP" `
+            --title "$env:GITHUB_REF_NAME" `
+            --generate-notes `
+            --latest=false
