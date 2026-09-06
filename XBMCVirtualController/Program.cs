@@ -27,8 +27,9 @@ namespace XBMCVirtualController
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            // Visual styles, text rendering, high-DPI mode and the default font
+            // all come from the Application* properties in the .csproj.
+            ApplicationConfiguration.Initialize();
             Application.Run(new Main());
         }
     }

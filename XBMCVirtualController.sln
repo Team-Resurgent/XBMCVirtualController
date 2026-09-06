@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.9.12112.369 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XBMCVirtualController", "XBMCVirtualController\XBMCVirtualController.csproj", "{93717DF3-20D2-46DC-96D0-11F0BABAE3C1}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{D693B6BC-6330-4A26-BACC-FBE3D89335BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerPixelAlphaForm", "PerPixelAlphaForm\PerPixelAlphaForm.csproj", "{BCAC44F6-4F4B-4C4B-9B4D-7F147685B476}"
 EndProject
@@ -17,8 +17,6 @@ Global
 		{93717DF3-20D2-46DC-96D0-11F0BABAE3C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93717DF3-20D2-46DC-96D0-11F0BABAE3C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93717DF3-20D2-46DC-96D0-11F0BABAE3C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D693B6BC-6330-4A26-BACC-FBE3D89335BB}.Debug|Any CPU.ActiveCfg = Debug
-		{D693B6BC-6330-4A26-BACC-FBE3D89335BB}.Release|Any CPU.ActiveCfg = Release
 		{BCAC44F6-4F4B-4C4B-9B4D-7F147685B476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCAC44F6-4F4B-4C4B-9B4D-7F147685B476}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCAC44F6-4F4B-4C4B-9B4D-7F147685B476}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52D26443-9D41-414E-BB2B-046B1AA26661}
 	EndGlobalSection
 EndGlobal

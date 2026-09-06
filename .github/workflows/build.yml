@@ -1,0 +1,65 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore XBMCVirtualController.sln
+
+      - name: Build
+        run: dotnet build XBMCVirtualController.sln -c Release --no-restore
+
+      - name: Publish (single-file, self-contained win-x64)
+        run: dotnet publish XBMCVirtualController/XBMCVirtualController.csproj -c Release --no-restore -o publish
+
+      - name: Determine package name
+        id: pkg
+        shell: pwsh
+        run: |
+          $version = ([xml](Get-Content XBMCVirtualController/XBMCVirtualController.csproj)).Project.PropertyGroup.Version |
+                     Where-Object { $_ } | Select-Object -First 1
+          if ($env:GITHUB_REF -like 'refs/tags/v*') {
+            $version = $env:GITHUB_REF -replace '^refs/tags/v', ''
+          }
+          $name = "XBMCVirtualController-$version-win-x64"
+          "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "name=$name"       | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          Write-Host "Packaging $name"
+
+      - name: Package zip (exe + skins)
+        shell: pwsh
+        run: |
+          # The publish folder is exactly what ships: the single self-contained
+          # exe plus the loose Skins folder and images it loads at runtime.
+          Get-ChildItem publish | Format-Table Name, Length
+          Compress-Archive -Path publish\* -DestinationPath "${{ steps.pkg.outputs.name }}.zip" -CompressionLevel Optimal
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.pkg.outputs.name }}
+          path: ${{ steps.pkg.outputs.name }}.zip
+          if-no-files-found: error
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.pkg.outputs.name }}.zip
+          generate_release_notes: true

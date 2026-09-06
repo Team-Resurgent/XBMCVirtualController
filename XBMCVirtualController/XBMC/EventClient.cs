@@ -207,6 +207,12 @@ namespace XBMC
 
         private bool Send(PacketType PacketType, byte[] Payload)
         {
+
+            if (socket == null)
+            {
+                return false;
+            }
+
             try
             {
 

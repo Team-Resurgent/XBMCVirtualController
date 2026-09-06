@@ -1,0 +1,64 @@
+## Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+publish/
+artifacts/
+*.zip
+
+## .NET / MSBuild
+project.lock.json
+project.fragment.lock.json
+*.nuget.props
+*.nuget.targets
+*.binlog
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.ipdb
+*.tlog
+*.log
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+
+## Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.svclog
+*.psess
+*.vsp
+*.vspx
+
+## Legacy VS project-upgrade leftovers
+Backup/
+_UpgradeReport_Files/
+UpgradeLog*.htm
+UpgradeLog*.XML
+UpgradeLog*.xml
+
+## ReSharper / JetBrains
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini

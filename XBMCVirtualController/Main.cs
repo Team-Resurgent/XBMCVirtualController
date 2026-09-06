@@ -459,11 +459,11 @@ namespace XBMCVirtualController
             toolStripMenuItemSendSingleClick.Checked = !toolStripMenuItemSendSingleClick.Checked;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            skinEngine.AltMode = !skinEngine.AltMode;
-            this.SetBitmap(skinEngine.RenderSkin(skinEngine.Skin));
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    skinEngine.AltMode = !skinEngine.AltMode;
+        //    this.SetBitmap(skinEngine.RenderSkin(skinEngine.Skin));
+        //}
 
     }
 
