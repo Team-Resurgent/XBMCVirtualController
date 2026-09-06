@@ -153,11 +153,12 @@ under the cursor — the fastest way to line up hotspots against artwork.
 
 ## Credits
 
-Originally written by **Team Blackbolt** in 2009. The Bradley skins are by Bradley;
-Xtender mimics the Microsoft Media Center remote.
+Originally written by **Team Blackbolt** in 2009, where **EqUiNoX** was one of the
+developers on the team. The Bradley skins are by Bradley; Xtender mimics the Microsoft
+Media Center remote.
 
-Modernised and maintained by **Team Resurgent** — ported from .NET Framework 2.0 to
-.NET 10 and repackaged as a single self-contained executable.
+Now modernised and maintained by **Team Resurgent** — again with EqUiNoX on it — ported
+from .NET Framework 2.0 to .NET 10 and repackaged as a single self-contained executable.
 
 ## Licence
 
