@@ -117,12 +117,16 @@ namespace XBMC
                 uniqueToken = UID;
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-                IPHostEntry ipHostEntry = Dns.GetHostEntry(Address);
-                foreach (IPAddress ipAddress in ipHostEntry.AddressList)
+                // Resolve forward only. Dns.GetHostEntry on an address that is
+                // already an IP literal performs a *reverse* lookup, which blocks
+                // for many seconds when the host has no PTR record - and this runs
+                // on the UI thread, so the whole remote appears frozen.
+                // GetHostAddresses returns an IP literal as-is, instantly.
+                foreach (IPAddress ipAddress in Dns.GetHostAddresses(Address))
                 {
                     if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
                     {
-                        socket.Connect(ipAddress.ToString(), Port);
+                        socket.Connect(ipAddress, Port);
                         return true;
                     }
                 }
